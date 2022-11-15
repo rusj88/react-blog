@@ -5,7 +5,7 @@ import ArticlesList from "./pages/ArticlesList";
 
 function App() {
   return (
-    <div className="bg-slate-300">
+    <div className="bg-slate-300 min-h-screen">
       <Navigation></Navigation>
       <Routes>
         <Route path="/" element={<ArticlesList />} />

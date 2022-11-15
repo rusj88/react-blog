@@ -25,5 +25,4 @@ export const blogApi = createApi({
   }),
 });
 
-export const { useGetArticlesQuery } = blogApi;
-export const { useGetArticleQuery } = blogApi;
+export const { useGetArticlesQuery, useGetArticleQuery } = blogApi;

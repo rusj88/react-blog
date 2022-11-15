@@ -5,16 +5,16 @@ export interface IAuthor {
 }
 
 export interface IArticle {
-  slug: string;
-  title: string;
-  description: string;
-  body: string;
-  createdAt: Date;
-  updatedAt: Date;
-  tagList: string[];
-  favorited: boolean;
-  favoritesCount: number;
-  author: IAuthor;
+  slug?: string;
+  title?: string;
+  description?: string;
+  body?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  tagList?: string[];
+  favorited?: boolean;
+  favoritesCount?: number;
+  author?: IAuthor;
 }
 
 export interface ServerResponse {
