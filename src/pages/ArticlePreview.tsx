@@ -10,7 +10,7 @@ function ArticlePreview({
   tagList,
 }: IArticle) {
   return (
-    <div className="min-h-[140px]	w-full p-4 bg-white drop-shadow-xl rounded">
+    <div className="min-h-[140px]	p-4 bg-white rounded">
       <div className="flex justify-between gap-2">
         <div className="flex-grow-0">
           <Link className="text-clip overflow-hidden" to={`/articles/${slug}`}>
@@ -35,7 +35,7 @@ function ArticlePreview({
           />
         </div>
       </div>
-      <p className="mt-4">{description}</p>
+      <p className="mt-6 mb-0">{description}</p>
     </div>
   );
 }

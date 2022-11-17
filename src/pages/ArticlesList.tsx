@@ -11,15 +11,21 @@ function ArticlesList() {
 
   return (
     <>
-      <div className="pt-10 mx-auto h-screen w-3/5">
+      <div className="p-10 mx-auto w-3/5">
         {isError && (
           <p className="text-center text-red-600">Something went wrong...</p>
         )}
         {isLoading && <p className="text-center text-blue-600">Loading...</p>}
-        <div className="flex flex-col items-center gap-[26px]">
-          {data?.articles?.map((ele) => {
-            return <ArticlePreview key={ele.slug} {...ele} />;
-          })}
+        <div className="min-h-[90vh] flex flex-col justify-between items-center">
+          <div className="flex flex-col gap-[26px] w-full pb-10">
+            {data?.articles?.map((ele) => {
+              return (
+                <div key={ele.slug} className="w-full drop-shadow-xl rounded">
+                  <ArticlePreview {...ele} />
+                </div>
+              );
+            })}
+          </div>
           <Pagination
             current={page}
             showSizeChanger={false}

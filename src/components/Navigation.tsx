@@ -1,6 +1,6 @@
 function Navigation() {
   return (
-    <nav className="flex justify-between items-center  h-[50px] px-5 shadow-md bg-gray-500 text-white">
+    <nav className="flex justify-between items-center h-16 w-full px-5 fixed top-0 left-0 shadow-md bg-gray-500 text-white z-10">
       <h3>RealWorld Blog</h3>
       <div>
         <button className="mr-4">sign in</button>
