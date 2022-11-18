@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import ArticlePage from "./pages/ArticlePage";
 import ArticlesList from "./pages/ArticlesList";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
         <Route path="/" element={<ArticlesList />} />
         <Route path="/articles" element={<ArticlesList />} />
         <Route path="/articles/:slug" element={<ArticlePage />} />
-        {/* <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        {/* 
     <Route path="/sign-in" element={<SignIn />} />
     <Route path="/profile" element={<Profile />} />
     <Route path="/new-article" element={userToken ? <CreateArticle/> : <SignIn />} />
