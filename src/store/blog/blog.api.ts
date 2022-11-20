@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IArticle, ServerResponse } from "../../models/models";
+import { IArticle, IServerResponse } from "../../models/models";
 
 export const blogApi = createApi({
   reducerPath: "blog/api",
@@ -7,7 +7,7 @@ export const blogApi = createApi({
     baseUrl: "https://blog.kata.academy/api/",
   }),
   endpoints: (build) => ({
-    getArticles: build.query<ServerResponse, number>({
+    getArticles: build.query<IServerResponse, number>({
       query: (page) => ({
         url: "articles",
         params: {

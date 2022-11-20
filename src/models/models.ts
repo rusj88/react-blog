@@ -17,7 +17,15 @@ export interface IArticle {
   author?: IAuthor;
 }
 
-export interface ServerResponse {
+export interface IServerResponse {
   articles: IArticle[];
   articlesCount: number;
+}
+
+export interface IInputs {
+  username: string;
+  email: string;
+  password: string;
+  passRepeat: string;
+  terms: boolean;
 }
