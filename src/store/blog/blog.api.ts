@@ -22,7 +22,18 @@ export const blogApi = createApi({
       }),
       transformResponse: (response: { article: IArticle }) => response.article,
     }),
+    registerUser: build.mutation<any, any>({
+      query: (userData) => ({
+        url: `users`,
+        method: "POST",
+        body: userData,
+      }),
+    }),
   }),
 });
 
-export const { useGetArticlesQuery, useGetArticleQuery } = blogApi;
+export const {
+  useGetArticlesQuery,
+  useGetArticleQuery,
+  useRegisterUserMutation,
+} = blogApi;
