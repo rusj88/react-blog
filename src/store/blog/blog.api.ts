@@ -29,6 +29,13 @@ export const blogApi = createApi({
         body: userData,
       }),
     }),
+    loginUser: build.mutation<any, any>({
+      query: (userData) => ({
+        url: `users/login`,
+        method: "POST",
+        body: userData,
+      }),
+    }),
   }),
 });
 
@@ -36,4 +43,5 @@ export const {
   useGetArticlesQuery,
   useGetArticleQuery,
   useRegisterUserMutation,
+  useLoginUserMutation,
 } = blogApi;
