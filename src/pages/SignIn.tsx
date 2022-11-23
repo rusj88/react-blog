@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { IInputs } from "../models/models";
+import { ISignUpForm } from "../models/models";
 import { useLoginUserMutation } from "../store/blog/blog.api";
 
 function SignIn() {
@@ -9,9 +9,9 @@ function SignIn() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Pick<IInputs, "email" | "password">>();
+  } = useForm<Pick<ISignUpForm, "email" | "password">>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: Pick<ISignUpForm, "email" | "password">) => {
     const userData = {
       user: {
         email: data.email,

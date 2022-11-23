@@ -22,10 +22,24 @@ export interface IServerResponse {
   articlesCount: number;
 }
 
-export interface IInputs {
+export interface ISignUpForm {
   username: string;
   email: string;
   password: string;
   passRepeat: string;
   terms: boolean;
+}
+
+export interface IRegisterUser {
+  user: Pick<ISignUpForm, "username" | "email" | "password">;
+}
+
+export interface ILoginUser {
+  user: Pick<ISignUpForm, "email" | "password">;
+}
+
+export interface IUser {
+  username: string;
+  email: string;
+  token: string;
 }

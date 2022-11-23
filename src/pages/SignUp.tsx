@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { IInputs } from "../models/models";
+import { ISignUpForm } from "../models/models";
 import { useRegisterUserMutation } from "../store/blog/blog.api";
 
 function SignUp() {
@@ -10,9 +10,9 @@ function SignUp() {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm<IInputs>();
+  } = useForm<ISignUpForm>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: ISignUpForm) => {
     const userData = {
       user: {
         username: data.username,

@@ -1,5 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IArticle, IServerResponse } from "../../models/models";
+import {
+  IArticle,
+  ILoginUser,
+  IRegisterUser,
+  IServerResponse,
+  IUser,
+} from "../../models/models";
 
 export const blogApi = createApi({
   reducerPath: "blog/api",
@@ -22,19 +28,20 @@ export const blogApi = createApi({
       }),
       transformResponse: (response: { article: IArticle }) => response.article,
     }),
-    registerUser: build.mutation<any, any>({
+    registerUser: build.mutation<void, IRegisterUser>({
       query: (userData) => ({
         url: `users`,
         method: "POST",
         body: userData,
       }),
     }),
-    loginUser: build.mutation<any, any>({
+    loginUser: build.mutation<IUser, ILoginUser>({
       query: (userData) => ({
         url: `users/login`,
         method: "POST",
         body: userData,
       }),
+      transformResponse: (response: { user: IUser }) => response.user,
     }),
   }),
 });
