@@ -1,16 +1,33 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ISignUpForm } from "../models/models";
 import { useRegisterUserMutation } from "../store/blog/blog.api";
 
 function SignUp() {
-  const [registerUser] = useRegisterUserMutation();
+  const [registerUser, { isSuccess, error }] = useRegisterUserMutation();
   const {
     register,
     handleSubmit,
     getValues,
+    // setError,
     formState: { errors },
   } = useForm<ISignUpForm>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/success");
+    }
+    if (error) {
+      if ("status" in error) {
+        console.log(error.data);
+        // Object.entries(response.errors).forEach(([key, responseErrors]) => {
+        //   setError(key, {message: responseErrors[0]})
+        // })
+      }
+    }
+  }, [isSuccess, navigate, error]);
 
   const onSubmit = (data: ISignUpForm) => {
     const userData = {
