@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import ArticlePage from "./pages/ArticlePage";
 import ArticlesList from "./pages/ArticlesList";
+import CreateArticle from "./pages/CreateArticle";
 import EditProfile from "./pages/EditProfile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/success" element={<Success />} />
         <Route path="/profile" element={<EditProfile />} />
+        <Route path="/new-article" element={<CreateArticle />} />
         {/* 
     <Route path="/new-article" element={userToken ? <CreateArticle/> : <SignIn />} />
     <Route path="/articles/:slug/edit" element={<EditArticle />} />
