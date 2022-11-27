@@ -1,10 +1,14 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { ISignUpForm } from "../models/models";
 import { useLoginUserMutation } from "../store/blog/blog.api";
+import { signIn } from "../store/blog/tokenSlice";
 
 function SignIn() {
-  const [loginUser] = useLoginUserMutation();
+  const dispatch = useDispatch();
+  const [loginUser, { isSuccess, data }] = useLoginUserMutation();
   const {
     register,
     handleSubmit,
@@ -20,6 +24,12 @@ function SignIn() {
     };
     loginUser(userData);
   };
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      dispatch(signIn(data.token));
+    }
+  }, [isSuccess, data, dispatch]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
