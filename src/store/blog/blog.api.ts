@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { RootState } from "../index";
 import {
   IArticle,
   ILoginUser,
@@ -11,6 +12,11 @@ export const blogApi = createApi({
   reducerPath: "blog/api",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://blog.kata.academy/api/",
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).blog.userToken;
+      headers.set("Authorization", token ? `Token ${token}` : "");
+      return headers;
+    },
   }),
   endpoints: (build) => ({
     getArticles: build.query<IServerResponse, number>({
@@ -43,6 +49,12 @@ export const blogApi = createApi({
       }),
       transformResponse: (response: { user: IUser }) => response.user,
     }),
+    getUser: build.query<IUser, void>({
+      query: () => ({
+        url: `user`,
+      }),
+      transformResponse: (response: { user: IUser }) => response.user,
+    }),
   }),
 });
 
@@ -51,4 +63,5 @@ export const {
   useGetArticleQuery,
   useRegisterUserMutation,
   useLoginUserMutation,
+  useGetUserQuery,
 } = blogApi;
