@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ControlPanel from "./ControlPanel";
 
 function Navigation() {
   return (
@@ -6,22 +7,7 @@ function Navigation() {
       <Link to={`/`}>
         <div className=" text-black text-lg">RealWorld Blog</div>
       </Link>
-      <div className="flex gap-4">
-        <Link to={`/sign-in`}>
-          <div className="w-24 h-12">
-            <div className="h-full flex justify-center items-center text-black text-lg">
-              Sign In
-            </div>
-          </div>
-        </Link>
-        <Link to={`/sign-up`}>
-          <div className="w-24 h-12 border-lime-500 border-2 rounded">
-            <div className="h-full flex justify-center items-center text-lime-500 text-lg">
-              Sign Up
-            </div>
-          </div>
-        </Link>
-      </div>
+      <ControlPanel />
     </nav>
   );
 }
