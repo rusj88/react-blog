@@ -15,7 +15,7 @@ function ControlPanel() {
           Create article
         </div>
       </Link>
-      <span>{data?.username}</span>
+      <span>{userToken && data?.username}</span>
       <button
         className="py-2 px-4 text-black text-lg border-black border-2 rounded"
         onClick={() => dispatch(signOut())}
