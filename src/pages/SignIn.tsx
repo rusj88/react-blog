@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ISignUpForm } from "../models/models";
 import { useLoginUserMutation } from "../store/blog/blog.api";
 import { signIn } from "../store/blog/tokenSlice";
 
 function SignIn() {
   const dispatch = useDispatch();
-  const [loginUser, { isSuccess, data }] = useLoginUserMutation();
+  const navigate = useNavigate();
+  const [loginUser, { isSuccess, data, error }] = useLoginUserMutation();
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<Pick<ISignUpForm, "email" | "password">>();
 
@@ -28,8 +30,21 @@ function SignIn() {
   useEffect(() => {
     if (isSuccess && data) {
       dispatch(signIn(data.token));
+      navigate("/");
     }
-  }, [isSuccess, data, dispatch]);
+
+    if (error) {
+      if ("status" in error) {
+        const errObj = JSON.parse(JSON.stringify(error.data));
+        Object.keys(errObj.errors).forEach((key) => {
+          if (key === "email or password") {
+            setError("email", { message: errObj.errors[key] });
+            setError("password", { message: errObj.errors[key] });
+          }
+        });
+      }
+    }
+  }, [isSuccess, data, dispatch, navigate, error, setError]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -49,7 +64,9 @@ function SignIn() {
                 message: "Please enter a valid email address",
               },
             })}
-            className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
+            className={`h-10 py-2 px-3 border border-gray-400 rounded mb-3 ${
+              errors.email && "border-red-600"
+            }`}
           />
           {errors?.email && (
             <div className="text-red-600 mb-3">{errors.email.message}</div>
@@ -67,7 +84,9 @@ function SignIn() {
               },
               maxLength: { value: 40, message: "no more than 40 symbols" },
             })}
-            className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
+            className={`h-10 py-2 px-3 border border-gray-400 rounded mb-3 ${
+              errors.password && "border-red-600"
+            }`}
           />
           {errors?.password && (
             <div className="text-red-600 mb-3">{errors.password.message}</div>
