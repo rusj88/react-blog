@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { ISignUpForm } from "../models/models";
 import { useRegisterUserMutation } from "../store/blog/blog.api";
+import { addServerErrors } from "../utils/validation";
 
 function SignUp() {
   const [registerUser, { isSuccess, error }] = useRegisterUserMutation();
@@ -10,7 +11,7 @@ function SignUp() {
     register,
     handleSubmit,
     getValues,
-    // setError,
+    setError,
     formState: { errors },
   } = useForm<ISignUpForm>();
   const navigate = useNavigate();
@@ -21,13 +22,11 @@ function SignUp() {
     }
     if (error) {
       if ("status" in error) {
-        console.log(error.data);
-        // Object.entries(response.errors).forEach(([key, responseErrors]) => {
-        //   setError(key, {message: responseErrors[0]})
-        // })
+        const errobj = JSON.parse(JSON.stringify(error.data));
+        addServerErrors(errobj.errors, setError);
       }
     }
-  }, [isSuccess, navigate, error]);
+  }, [isSuccess, navigate, error, setError]);
 
   const onSubmit = (data: ISignUpForm) => {
     const userData = {
