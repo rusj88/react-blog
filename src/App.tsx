@@ -10,7 +10,7 @@ import Success from "./pages/Success";
 
 function App() {
   return (
-    <div className="pt-16 bg-slate-300 min-h-screen">
+    <div className="pt-16 bg-slate-200 min-h-screen">
       <Navigation></Navigation>
       <Routes>
         <Route path="/" element={<ArticlesList />} />
