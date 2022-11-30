@@ -57,7 +57,9 @@ function SignUp() {
                 message: "No more than 20 symbols",
               },
             })}
-            className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
+            className={`h-10 py-2 px-3 border border-gray-400 rounded mb-3 ${
+              errors.username && "border-red-600"
+            }`}
           />
           {errors?.username && (
             <div className="text-red-600 mb-3">{errors.username.message}</div>
@@ -75,7 +77,9 @@ function SignUp() {
                 message: "Please enter a valid email address",
               },
             })}
-            className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
+            className={`h-10 py-2 px-3 border border-gray-400 rounded mb-3 ${
+              errors.email && "border-red-600"
+            }`}
           />
           {errors?.email && (
             <div className="text-red-600 mb-3">{errors.email.message}</div>
@@ -93,7 +97,9 @@ function SignUp() {
               },
               maxLength: { value: 40, message: "no more than 40 symbols" },
             })}
-            className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
+            className={`h-10 py-2 px-3 border border-gray-400 rounded mb-3 ${
+              errors.password && "border-red-600"
+            }`}
           />
           {errors?.password && (
             <div className="text-red-600 mb-3">{errors.password.message}</div>
@@ -108,7 +114,9 @@ function SignUp() {
               validate: (value) =>
                 value === getValues("password") || "Passwords must match",
             })}
-            className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
+            className={`h-10 py-2 px-3 border border-gray-400 rounded mb-3 ${
+              errors.passRepeat && "border-red-600"
+            }`}
           />
           {errors?.passRepeat && (
             <div className="text-red-600 mb-3">{errors.passRepeat.message}</div>
