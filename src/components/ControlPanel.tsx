@@ -15,7 +15,11 @@ function ControlPanel() {
           Create article
         </div>
       </Link>
-      <span>{userToken && data?.username}</span>
+      <Link to={"/profile"}>
+        <span className="text-lg text-black">
+          {userToken && data?.username}
+        </span>
+      </Link>
       <button
         className="py-2 px-4 text-black text-lg border-black border-2 rounded"
         onClick={() => dispatch(signOut())}

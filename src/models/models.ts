@@ -38,6 +38,10 @@ export interface ILoginUser {
   user: Pick<ISignUpForm, "email" | "password">;
 }
 
+export interface IEditUser {
+  user: IEditProfile;
+}
+
 export interface IUser {
   username: string;
   email: string;
@@ -50,5 +54,5 @@ export interface IEditProfile {
   username: string;
   email: string;
   password: string;
-  avatar: string;
+  image: string;
 }

@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { RootState } from "../index";
 import {
   IArticle,
+  IEditUser,
   ILoginUser,
   IRegisterUser,
   IServerResponse,
@@ -55,6 +56,14 @@ export const blogApi = createApi({
       }),
       transformResponse: (response: { user: IUser }) => response.user,
     }),
+    updateUser: build.mutation<IUser, IEditUser>({
+      query: (userData) => ({
+        url: `user`,
+        method: "PUT",
+        body: userData,
+      }),
+      transformResponse: (response: { user: IUser }) => response.user,
+    }),
   }),
 });
 
@@ -64,4 +73,5 @@ export const {
   useRegisterUserMutation,
   useLoginUserMutation,
   useGetUserQuery,
+  useUpdateUserMutation,
 } = blogApi;

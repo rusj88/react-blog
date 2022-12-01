@@ -1,14 +1,26 @@
 import { useForm } from "react-hook-form";
 import { IEditProfile } from "../models/models";
+import { useUpdateUserMutation } from "../store/blog/blog.api";
 
 function EditProfile() {
+  const [updateUser] = useUpdateUserMutation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IEditProfile>();
 
-  const onSubmit = (data: any) => {};
+  const onSubmit = (data: IEditProfile) => {
+    const userData = {
+      user: {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        image: data.image,
+      },
+    };
+    updateUser(userData);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -69,9 +81,9 @@ function EditProfile() {
           <label htmlFor="avatar">Avatar image (url)</label>
           <input
             type="text"
-            id="avatar"
+            id="image"
             placeholder="Avatar image"
-            {...register("avatar", {
+            {...register("image", {
               pattern: {
                 value:
                   /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi,
@@ -80,8 +92,8 @@ function EditProfile() {
             })}
             className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
           />
-          {errors?.avatar && (
-            <div className="text-red-600 mb-3">{errors.avatar.message}</div>
+          {errors?.image && (
+            <div className="text-red-600 mb-3">{errors.image.message}</div>
           )}
           <button className="h-10 py-2 px-4 bg-sky-500 text-white rounded mb-2">
             Save
