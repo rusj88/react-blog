@@ -1,14 +1,26 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IEditProfile } from "../models/models";
 import { useUpdateUserMutation } from "../store/blog/blog.api";
+import { addServerErrors } from "../utils/validation";
 
 function EditProfile() {
-  const [updateUser] = useUpdateUserMutation();
+  const [updateUser, { error }] = useUpdateUserMutation();
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<IEditProfile>();
+
+  useEffect(() => {
+    if (error) {
+      if ("status" in error) {
+        const errobj = JSON.parse(JSON.stringify(error.data));
+        addServerErrors(errobj.errors, setError);
+      }
+    }
+  }, [error, setError]);
 
   const onSubmit = (data: IEditProfile) => {
     const userData = {
@@ -37,7 +49,9 @@ function EditProfile() {
               minLength: 3,
               maxLength: 20,
             })}
-            className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
+            className={`h-10 py-2 px-3 border border-gray-400 rounded mb-3 ${
+              errors.username && "border-red-600"
+            }`}
           />
           {errors?.username && (
             <div className="text-red-600 mb-3">{errors.username.message}</div>
@@ -55,7 +69,9 @@ function EditProfile() {
                 message: "Please enter a valid email address",
               },
             })}
-            className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
+            className={`h-10 py-2 px-3 border border-gray-400 rounded mb-3 ${
+              errors.email && "border-red-600"
+            }`}
           />
           {errors?.email && (
             <div className="text-red-600 mb-3">{errors.email.message}</div>
@@ -73,7 +89,9 @@ function EditProfile() {
               },
               maxLength: 40,
             })}
-            className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
+            className={`h-10 py-2 px-3 border border-gray-400 rounded mb-3 ${
+              errors.password && "border-red-600"
+            }`}
           />
           {errors?.password && (
             <div className="text-red-600 mb-3">{errors.password.message}</div>
@@ -90,7 +108,9 @@ function EditProfile() {
                 message: "please enter a valid url",
               },
             })}
-            className="h-10 py-2 px-3 border border-gray-400 rounded mb-3"
+            className={`h-10 py-2 px-3 border border-gray-400 rounded mb-3 ${
+              errors.image && "border-red-600"
+            }`}
           />
           {errors?.image && (
             <div className="text-red-600 mb-3">{errors.image.message}</div>
