@@ -30,7 +30,7 @@ function ArticlePreview({
           <img
             src={author?.image}
             alt=""
-            className="max-h-[46px] max-w-[46px] rounded-full
+            className="h-12 w-12 rounded-full
           "
           />
         </div>

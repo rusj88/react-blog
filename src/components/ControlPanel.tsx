@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { RootState } from "../store";
 import { useGetUserQuery } from "../store/blog/blog.api";
 import { signOut } from "../store/blog/tokenSlice";
+import UserPic from "../icons/userpic.svg";
 
 function ControlPanel() {
   const { userToken } = useSelector((state: RootState) => state.blog);
@@ -16,9 +17,16 @@ function ControlPanel() {
         </div>
       </Link>
       <Link to={"/profile"}>
-        <span className="text-lg text-black">
-          {userToken && data?.username}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-lg text-black font-bold">
+            {userToken && data?.username}
+          </span>
+          <img
+            src={data?.image || UserPic}
+            alt="user avatar"
+            className="h-12 w-12 rounded-full"
+          />
+        </div>
       </Link>
       <button
         className="py-2 px-4 text-black text-lg border-black border-2 rounded"
