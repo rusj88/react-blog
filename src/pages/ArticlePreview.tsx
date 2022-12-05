@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { IArticle } from "../models/models";
 import { Tag } from "antd";
+import { HeartIcon } from "@heroicons/react/24/outline";
 
 function ArticlePreview({
   title,
@@ -8,14 +9,22 @@ function ArticlePreview({
   slug,
   author,
   tagList,
+  favoritesCount,
 }: IArticle) {
   return (
     <div className="min-h-[140px]	p-4 bg-white rounded">
       <div className="flex justify-between gap-2">
         <div className="flex-grow-0">
-          <Link className="text-clip overflow-hidden" to={`/articles/${slug}`}>
-            <h2 className="font-bold">{title}</h2>
-          </Link>
+          <div className="flex itemc-center">
+            <Link
+              className="text-clip overflow-hidden"
+              to={`/articles/${slug}`}
+            >
+              <h2 className="font-bold mr-3">{title}</h2>
+            </Link>
+            <HeartIcon className="h-6 w-6" />
+            {favoritesCount}
+          </div>
           <div className="flex flex-grow-0">
             {tagList?.map((ele, ind) => (
               <Tag key={ind}>{ele}</Tag>
