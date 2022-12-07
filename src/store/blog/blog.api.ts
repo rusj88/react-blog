@@ -64,6 +64,20 @@ export const blogApi = createApi({
       }),
       transformResponse: (response: { user: IUser }) => response.user,
     }),
+    favoriteArticle: build.mutation<IArticle, string>({
+      query: (slug) => ({
+        url: `articles/${slug}/favorite`,
+        method: "POST",
+      }),
+      transformResponse: (response: { article: IArticle }) => response.article,
+    }),
+    unfavoriteArticle: build.mutation<IArticle, string>({
+      query: (slug) => ({
+        url: `articles/${slug}/favorite`,
+        method: "DELETE",
+      }),
+      transformResponse: (response: { article: IArticle }) => response.article,
+    }),
   }),
 });
 
