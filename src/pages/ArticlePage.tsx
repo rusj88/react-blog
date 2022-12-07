@@ -1,6 +1,6 @@
 import { useGetArticleQuery } from "../store/blog/blog.api";
 import { useParams } from "react-router-dom";
-import ArticlePreview from "./ArticlePreview";
+import ArticlePreview from "../components/ArticlePreview";
 
 function ArticlePage() {
   const { slug } = useParams();

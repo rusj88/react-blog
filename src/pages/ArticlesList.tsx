@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGetArticlesQuery } from "../store/blog/blog.api";
-import ArticlePreview from "./ArticlePreview";
+import ArticlePreview from "../components/ArticlePreview";
 import "antd/dist/antd.css";
 import { Pagination } from "antd";
 
